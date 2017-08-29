@@ -1,12 +1,20 @@
 from django.db import models
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework.reverse import reverse
+from django.utils import timezone
 
 
-class APIRootView(APIView):
-    def get(self, request):
-        data = {
-            'user-list': reverse('user-list', request=request),
-        }
-        return Response(data)
+class Patient(models.Model):
+    SEX = [
+        ('M', 'Male'),
+        ('F', 'Female'),
+    ]
+    id = models.AutoField(primary_key=True)
+    email = models.CharField(max_length=254)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    mobile_number = models.CharField(max_length=11)
+    sex = models.CharField(max_length=1, choices=SEX)
+    date_joined = models.DateTimeField(default=timezone.now(),editable=False)
+
+
+
+

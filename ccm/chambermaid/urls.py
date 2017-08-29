@@ -4,6 +4,7 @@ from chambermaid import views
 
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
+router.register(r'patients', views.PatientViewSet)
 
 urlpatterns = [
     url(r'^', include(router.urls)),
