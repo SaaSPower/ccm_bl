@@ -1,6 +1,5 @@
 from rest_framework import viewsets
-from django.contrib.auth.models import User
-from chambermaid.serializers import UserSerializer, PatientSerializer
+from chambermaid.serializers import *
 from chambermaid.models import Patient
 
 
@@ -18,4 +17,52 @@ class PatientViewSet(viewsets.ModelViewSet):
     """
     queryset = Patient.objects.all()
     serializer_class = PatientSerializer
+
+
+class RatingScaleViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = RatingScale.objects.all()
+    serializer_class = RatingScaleSerializer
+
+
+class StatementViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = Statement.objects.all()
+    serializer_class = StatementSerializer
+
+
+class ProjectViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+
+
+class TypeViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = Type.objects.all()
+    serializer_class = TypeSerializer
+
+
+class CaseViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = Case.objects.all()
+    serializer_class = CaseSerializer
+
+
+class AnswerSheetViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = AnswerSheet.objects.all()
+    serializer_class = AnswerSheetSerializer
 
