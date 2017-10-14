@@ -46,10 +46,16 @@ class Project(models.Model):
     rating_scales = models.ManyToManyField(RatingScale, )
 
 
+class TypeGroup(models.Model):
+    id = models.AutoField(primary_key=True)
+    description = models.TextField()
+
+
 class Type(models.Model):
     id = models.AutoField(primary_key=True)
     label = models.CharField(unique=True, max_length=254, db_index=True)
     description = models.TextField()
+    model_group = models.ForeignKey(TypeGroup, on_delete=models.CASCADE)
 
 
 class Case(models.Model):
