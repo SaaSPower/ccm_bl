@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from chambermaid.models import Patient, RatingScale, Statement, Project, Type, Case, AnswerSheet
+from chambermaid.models import Patient, RatingScale, Statement, Project, Type, Case, AnswerSheet, TypeGroup
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
@@ -42,6 +42,13 @@ class TypeSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Type
+        fields = '__all__'
+
+
+class TypeGroupSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = TypeGroup
         fields = '__all__'
 
 

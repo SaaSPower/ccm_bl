@@ -9,6 +9,7 @@ router.register(r'ratingscales', views.RatingScaleViewSet)
 router.register(r'statements', views.StatementViewSet)
 router.register(r'projects', views.ProjectViewSet)
 router.register(r'types', views.TypeViewSet)
+router.register(r'typegroups', views.TypeGroupViewSet)
 router.register(r'cases', views.CaseViewSet)
 router.register(r'answersheets', views.AnswerSheetViewSet)
 

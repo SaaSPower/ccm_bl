@@ -51,6 +51,14 @@ class TypeViewSet(viewsets.ModelViewSet):
     serializer_class = TypeSerializer
 
 
+class TypeGroupViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = TypeGroup.objects.all()
+    serializer_class = TypeGroupSerializer
+
+
 class CaseViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
