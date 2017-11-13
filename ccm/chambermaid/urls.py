@@ -8,9 +8,11 @@ router.register(r'patients', views.PatientViewSet)
 router.register(r'ratingscales', views.RatingScaleViewSet)
 router.register(r'statements', views.StatementViewSet)
 router.register(r'projects', views.ProjectViewSet)
+router.register(r'project-ratingscale', views.ProjectRatingScaleViewSet)
 router.register(r'types', views.TypeViewSet)
 router.register(r'typegroups', views.TypeGroupViewSet)
 router.register(r'cases', views.CaseViewSet)
+router.register(r'case-type', views.CaseTypeViewSet)
 router.register(r'answersheets', views.AnswerSheetViewSet)
 
 urlpatterns = [

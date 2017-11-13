@@ -43,28 +43,43 @@ class Project(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=254, db_index=True)
     description = models.TextField()
-    rating_scales = models.ManyToManyField(RatingScale, )
+    rating_scales = models.ManyToManyField(RatingScale, through='ProjectRatingScale',
+                                           through_fields=('project', 'rating_scale'))
+
+
+class ProjectRatingScale(models.Model):
+    id = models.AutoField(primary_key=True)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    rating_scale = models.ForeignKey(RatingScale, on_delete=models.CASCADE)
 
 
 class TypeGroup(models.Model):
     id = models.AutoField(primary_key=True)
+    group_code = models.CharField(max_length=254, blank=True)
     description = models.TextField()
 
 
 class Type(models.Model):
     id = models.AutoField(primary_key=True)
+    group_index = models.IntegerField(blank=True)
     label = models.CharField(unique=True, max_length=254, db_index=True)
     description = models.TextField()
-    model_group = models.ForeignKey(TypeGroup, on_delete=models.CASCADE)
+    type_group = models.ForeignKey(TypeGroup, on_delete=models.CASCADE)
 
 
 class Case(models.Model):
     id = models.AutoField(primary_key=True)
-    patient_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    project_id = models.ForeignKey(Project, on_delete=models.CASCADE)
-    types = models.ManyToManyField(Type)
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    types = models.ManyToManyField(Type, through='CaseType', through_fields=('case', 'type'))
     date_created = models.DateTimeField(default=now, editable=False)
     medical_history = models.TextField()
+
+
+class CaseType(models.Model):
+    id = models.AutoField(primary_key=True)
+    case = models.ForeignKey(Case, on_delete=models.CASCADE)
+    type = models.ForeignKey(Type, on_delete=models.CASCADE)
 
 
 class AnswerSheet(models.Model):

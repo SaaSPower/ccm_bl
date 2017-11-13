@@ -1,6 +1,7 @@
 from rest_framework import viewsets
 from chambermaid.serializers import *
 from chambermaid.models import Patient
+from rest_framework.response import Response
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
@@ -43,6 +44,14 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
 
 
+class ProjectRatingScaleViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
+    queryset = ProjectRatingScale.objects.all()
+    serializer_class = ProjectRatingScaleSerializer
+
+
 class TypeViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `detail` actions.
@@ -65,6 +74,11 @@ class CaseViewSet(viewsets.ModelViewSet):
     """
     queryset = Case.objects.all()
     serializer_class = CaseSerializer
+
+
+class CaseTypeViewSet(viewsets.ModelViewSet):
+    queryset = CaseType.objects.all()
+    serializer_class = CaseTypeSerializer
 
 
 class AnswerSheetViewSet(viewsets.ModelViewSet):
