@@ -30,7 +30,7 @@ class Statement(models.Model):
         ('4', 'Text'),
     ]
     id = models.AutoField(primary_key=True)
-    rating_scale = models.ForeignKey(RatingScale, db_index=True, on_delete=models.CASCADE)
+    rating_scale = models.ForeignKey(RatingScale, related_name='statements', db_index=True, on_delete=models.CASCADE)
     sort_index = models.IntegerField(db_index=True)
     statement = models.TextField()
     description = models.TextField()
@@ -64,13 +64,13 @@ class Type(models.Model):
     group_index = models.IntegerField(blank=True)
     label = models.CharField(unique=True, max_length=254, db_index=True)
     description = models.TextField()
-    type_group = models.ForeignKey(TypeGroup, on_delete=models.CASCADE)
+    type_group = models.ForeignKey(TypeGroup, related_name='types', on_delete=models.CASCADE)
 
 
 class Case(models.Model):
     id = models.AutoField(primary_key=True)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    patient = models.ForeignKey(Patient, related_name='cases', on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, related_name='cases', on_delete=models.CASCADE)
     types = models.ManyToManyField(Type, through='CaseType', through_fields=('case', 'type'))
     date_created = models.DateTimeField(default=now, editable=False)
     medical_history = models.TextField()
@@ -85,7 +85,7 @@ class CaseType(models.Model):
 class AnswerSheet(models.Model):
     id = models.AutoField(primary_key=True)
     rating_scale = models.ForeignKey(RatingScale, on_delete=models.CASCADE)
-    case = models.ForeignKey(Case, on_delete=models.CASCADE)
+    case = models.ForeignKey(Case, related_name='answersheets', on_delete=models.CASCADE)
     answer1 = models.CharField(max_length=254, blank=True)
     answer2 = models.CharField(max_length=254, blank=True)
     answer3 = models.CharField(max_length=254, blank=True)
@@ -106,11 +106,11 @@ class AnswerSheet(models.Model):
     answer18 = models.CharField(max_length=254, blank=True)
     answer19 = models.CharField(max_length=254, blank=True)
     answer20 = models.CharField(max_length=254, blank=True)
-    answer21 = models.TextField(default='')
-    answer22 = models.TextField(default='')
-    answer23 = models.TextField(default='')
-    answer24 = models.TextField(default='')
-    answer25 = models.TextField(default='')
+    answer21 = models.TextField(default='', blank=True)
+    answer22 = models.TextField(default='', blank=True)
+    answer23 = models.TextField(default='', blank=True)
+    answer24 = models.TextField(default='', blank=True)
+    answer25 = models.TextField(default='', blank=True)
     date_created = models.DateTimeField(default=now, editable=False)
 
 
