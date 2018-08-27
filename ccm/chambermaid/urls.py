@@ -1,6 +1,7 @@
 from django.conf.urls import url, include
 from rest_framework.routers import DefaultRouter
 from chambermaid import views
+from django.contrib.auth import views as authviews
 
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
@@ -22,6 +23,9 @@ router.register(r'answersheets', views.AnswerSheetViewSet)
 router.register(r'answersheets', views.NestedAnswerSheetViewSet)
 
 urlpatterns = [
+    url('', include('django.contrib.auth.urls')),
+    url('account/login', authviews.LoginView.as_view()),
     url(r'^', include(router.urls)),
-    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
+
 ]
